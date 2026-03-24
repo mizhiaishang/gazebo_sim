@@ -1,0 +1,18 @@
+running develop
+running egg_info
+writing smart_agent_gazebo.egg-info/PKG-INFO
+writing dependency_links to smart_agent_gazebo.egg-info/dependency_links.txt
+writing entry points to smart_agent_gazebo.egg-info/entry_points.txt
+writing requirements to smart_agent_gazebo.egg-info/requires.txt
+writing top-level names to smart_agent_gazebo.egg-info/top_level.txt
+reading manifest file 'smart_agent_gazebo.egg-info/SOURCES.txt'
+writing manifest file 'smart_agent_gazebo.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/test/wf3/gazebo/agentsd_ws/install/smart_agent_gazebo/lib/python3.10/site-packages/smart-agent-gazebo.egg-link (link to .)
+Installing data_recorder script to /home/test/wf3/gazebo/agentsd_ws/install/smart_agent_gazebo/lib/smart_agent_gazebo
+Installing keyboard_teleop script to /home/test/wf3/gazebo/agentsd_ws/install/smart_agent_gazebo/lib/smart_agent_gazebo
+Installing sensor_monitor script to /home/test/wf3/gazebo/agentsd_ws/install/smart_agent_gazebo/lib/smart_agent_gazebo
+Installing web_gateway script to /home/test/wf3/gazebo/agentsd_ws/install/smart_agent_gazebo/lib/smart_agent_gazebo
+
+Installed /home/test/wf3/gazebo/agentsd_ws/build/smart_agent_gazebo
+running symlink_data
