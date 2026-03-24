@@ -1,0 +1,6 @@
+[console_scripts]
+data_recorder = smart_agent_gazebo.data_recorder:main
+keyboard_teleop = smart_agent_gazebo.keyboard_teleop:main
+sensor_monitor = smart_agent_gazebo.sensor_monitor:main
+web_gateway = smart_agent_gazebo.web_gateway:main
+
