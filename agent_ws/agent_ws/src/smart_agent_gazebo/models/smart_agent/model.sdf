@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="smart_agent">
+    <pose>0 0 0.25 0 0 0</pose>
+    <static>false</static>
+    <plugin
+      filename="libignition-gazebo-velocity-control-system.so"
+      name="ignition::gazebo::systems::VelocityControl">
+      <topic>/model/smart_agent/cmd_vel</topic>
+    </plugin>
+
+    <link name="base_link">
+      <inertial>
+        <mass>8.0</mass>
+        <inertia>
+          <ixx>0.28</ixx>
+          <iyy>0.28</iyy>
+          <izz>0.45</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <pose>0 0 0.24 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.5 0.35 0.48</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <pose>0 0 0.24 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.5 0.35 0.48</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5 0.5 0.5 1</ambient>
+          <diffuse>0.5 0.5 0.5 1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <link name="lidar_link">
+      <pose>0.10 0 0.56 0 0 0</pose>
+      <sensor name="lidar_sensor" type="lidar">
+        <topic>/agent/lidar/scan</topic>
+        <update_rate>10</update_rate>
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <gz_frame_id>lidar_link</gz_frame_id>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>0.0</min_angle>
+              <max_angle>0.0</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.12</min>
+            <max>15.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.005</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.04</radius>
+            <length>0.04</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.1 0.1 0.1 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <joint name="lidar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>lidar_link</child>
+    </joint>
+
+    <link name="front_camera_link">
+      <pose>0.23 0 0.50 0 0 0</pose>
+      <sensor name="front_camera_sensor" type="camera">
+        <topic>/agent/front_camera/image</topic>
+        <update_rate>20</update_rate>
+        <always_on>true</always_on>
+        <gz_frame_id>front_camera_link</gz_frame_id>
+        <camera>
+          <horizontal_fov>1.396</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>50.0</far>
+          </clip>
+        </camera>
+      </sensor>
+      <visual name="visual">
+        <geometry><box><size>0.05 0.05 0.05</size></box></geometry>
+        <material><ambient>0.2 0.2 0.9 1</ambient><diffuse>0.2 0.2 0.9 1</diffuse></material>
+      </visual>
+    </link>
+    <joint name="front_camera_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>front_camera_link</child>
+    </joint>
+
+    <link name="rear_camera_link">
+      <pose>-0.23 0 0.50 0 0 3.14159</pose>
+      <sensor name="rear_camera_sensor" type="camera">
+        <topic>/agent/rear_camera/image</topic>
+        <update_rate>20</update_rate>
+        <always_on>true</always_on>
+        <gz_frame_id>rear_camera_link</gz_frame_id>
+        <camera>
+          <horizontal_fov>1.396</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>50.0</far>
+          </clip>
+        </camera>
+      </sensor>
+      <visual name="visual">
+        <geometry><box><size>0.05 0.05 0.05</size></box></geometry>
+        <material><ambient>0.2 0.8 0.2 1</ambient><diffuse>0.2 0.8 0.2 1</diffuse></material>
+      </visual>
+    </link>
+    <joint name="rear_camera_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>rear_camera_link</child>
+    </joint>
+
+    <link name="depth_camera_link">
+      <pose>0.23 0 0.50 0 0 0</pose>
+      <sensor name="depth_camera_sensor" type="depth_camera">
+        <topic>/agent/depth_camera/image</topic>
+        <update_rate>15</update_rate>
+        <always_on>true</always_on>
+        <gz_frame_id>depth_camera_link</gz_frame_id>
+        <camera>
+          <horizontal_fov>1.396</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>20.0</far>
+          </clip>
+        </camera>
+      </sensor>
+      <visual name="visual">
+        <geometry><box><size>0.05 0.05 0.05</size></box></geometry>
+        <material><ambient>0.9 0.4 0.1 1</ambient><diffuse>0.9 0.4 0.1 1</diffuse></material>
+      </visual>
+    </link>
+    <joint name="depth_camera_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>depth_camera_link</child>
+    </joint>
+  </model>
+</sdf>
