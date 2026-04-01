@@ -18,6 +18,7 @@ def generate_launch_description():
     web_port = LaunchConfiguration("web_port")
     cmd_max_hz = LaunchConfiguration("cmd_max_hz")
     recording_dir = LaunchConfiguration("recording_dir")
+    dataset_recording_dir = LaunchConfiguration("dataset_recording_dir")
     render_engine = LaunchConfiguration("render_engine")
 
     world_arg = DeclareLaunchArgument(
@@ -42,8 +43,13 @@ def generate_launch_description():
     )
     recording_dir_arg = DeclareLaunchArgument(
         "recording_dir",
-        default_value=PathJoinSubstitution([EnvironmentVariable("HOME"), "agent_records"]),
+        default_value="/home/test",
         description="Directory used by recorder when started from web button",
+    )
+    dataset_recording_dir_arg = DeclareLaunchArgument(
+        "dataset_recording_dir",
+        default_value="/home/test/dataset",
+        description="Directory used by dataset recorder when started from web button",
     )
     render_engine_arg = DeclareLaunchArgument(
         "render_engine",
@@ -127,13 +133,18 @@ def generate_launch_description():
             {"cmd_timeout_sec": 0.5},
             {"cmd_max_hz": ParameterValue(cmd_max_hz, value_type=float)},
             {"record_output_dir": recording_dir},
-            {"record_save_interval_sec": 2.0},
+            {"record_save_interval_sec": 1.0},
             {"record_sync_tolerance_sec": 0.6},
             {"record_require_lidar": True},
-            {"record_imu_save_hz": 100.0},
+            {"record_imu_save_hz": 20.0},
             {"record_imu_window_sec": 0.1},
             {"record_pose_topic": "/world/small_house/dynamic_pose/info"},
             {"record_run_prefix": "run"},
+            {"dataset_record_output_dir": dataset_recording_dir},
+            {"dataset_record_save_interval_sec": 1.0},
+            {"dataset_record_sync_tolerance_sec": 0.6},
+            {"dataset_record_require_lidar": True},
+            {"dataset_record_pose_topic": "/world/small_house/dynamic_pose/info"},
         ],
     )
 
@@ -144,6 +155,7 @@ def generate_launch_description():
             port_arg,
             cmd_max_hz_arg,
             recording_dir_arg,
+            dataset_recording_dir_arg,
             render_engine_arg,
             gz_resource_path,
             ign_resource_path,

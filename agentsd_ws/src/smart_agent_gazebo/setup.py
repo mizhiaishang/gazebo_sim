@@ -46,6 +46,7 @@ setup(
         'console_scripts': [
             'sensor_monitor = smart_agent_gazebo.sensor_monitor:main',
             'data_recorder = smart_agent_gazebo.data_recorder:main',
+            'dataset_recorder = smart_agent_gazebo.dataset_recorder:main',
             'keyboard_teleop = smart_agent_gazebo.keyboard_teleop:main',
             'web_gateway = smart_agent_gazebo.web_gateway:main',
         ],

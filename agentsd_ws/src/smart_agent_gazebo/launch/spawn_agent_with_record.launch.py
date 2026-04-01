@@ -21,7 +21,7 @@ def generate_launch_description():
     )
     recording_dir_arg = DeclareLaunchArgument(
         'recording_dir',
-        default_value=PathJoinSubstitution([EnvironmentVariable('HOME'), 'agent_records']),
+        default_value='/home/test',
         description='Directory used to save rgb/depth images and lidar bin files',
     )
 
@@ -81,10 +81,10 @@ def generate_launch_description():
         parameters=[
             {'use_sim_time': True},
             {'output_dir': recording_dir},
-            {'save_interval_sec': 2.0},
+            {'save_interval_sec': 1.0},
             {'sync_tolerance_sec': 0.6},
             {'require_lidar': True},
-            {'imu_save_hz': 100.0},
+            {'imu_save_hz': 20.0},
             {'imu_window_sec': 0.1},
             {'pose_topic': '/world/small_house/dynamic_pose/info'},
             {'run_prefix': 'run'},
